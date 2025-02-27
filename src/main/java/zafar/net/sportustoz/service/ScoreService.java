@@ -58,20 +58,16 @@ public class ScoreService {
         return score;
     }
     public Score submitScore(ScoreCreateDto dto) {
-        // Foydalanuvchini ID bo‘yicha topish
+
         AppUser user = appUserService.getUserById(dto.getUserId());
 
-        // Ballarni hisoblash
         int scoreValue = calculateScore(user, dto.getSecund(), dto.getMinute(), dto.getPullUp());
 
-        // Foydalanuvchining yosh turini aniqlash
         AgeType ageType = appUserService.determineAgeType(user.getAge());
 
-        // Normativni yosh turiga ko‘ra topish
         Normativ normativ = normativRepository.findByAgeType_Id(Math.toIntExact(ageType.getId()))
                 .orElseThrow(() -> new RuntimeException("Mos normativ topilmadi!"));
 
-        // Yangi Score obyektini yaratish va to‘ldirish
         Score score = new Score();
         score.setAppUser(user);
         score.setNormativ(normativ);
@@ -81,7 +77,6 @@ public class ScoreService {
 
         score.setBall(scoreValue);
 
-        // Score obyektini saqlash
         return scoreRepository.save(score);
     }
 
