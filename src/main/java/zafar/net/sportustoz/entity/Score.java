@@ -1,30 +1,31 @@
 package zafar.net.sportustoz.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+@Getter
+@Setter
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@AllArgsConstructor
+@SuperBuilder
 public class Score {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private Double secund;
     private Double minute;
-    private Integer pullUp;
+    private Double pullUp;
     private Integer ball;
 
     @ManyToOne
+    private Normativ normativ;
+
+    @ManyToOne
     private AppUser user;
+
 }
+

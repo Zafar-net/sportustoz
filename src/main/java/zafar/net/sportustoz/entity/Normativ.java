@@ -5,17 +5,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Entity
+import java.util.List;
+
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Entity
 public class Normativ {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,5 +22,9 @@ public class Normativ {
 
     @ManyToOne
     private AgeType ageType;
+
+    @OneToMany(mappedBy = "normativ")
+    private List<Score> scores;
+
 }
 

@@ -24,11 +24,17 @@ public class AppUserService {
         return appUserRepository.save(user);
     }
 
-    private AgeType determineAgeType(int age) {
+    public AgeType determineAgeType(int age) {
         if (age <= 27) return ageTypeRepository.findById(1L).orElseThrow();
         else if (age <= 32) return ageTypeRepository.findById(2L).orElseThrow();
         else if (age <= 37) return ageTypeRepository.findById(3L).orElseThrow();
         else if (age <= 42) return ageTypeRepository.findById(4L).orElseThrow();
         else return ageTypeRepository.findById(5L).orElseThrow();
     }
+    public AppUser getUserById(Long userId) {
+        return appUserRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("Foydalanuvchi topilmadi!"));
+    }
+
+
 }

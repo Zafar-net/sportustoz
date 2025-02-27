@@ -4,21 +4,28 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.apache.catalina.User;
 
-@Entity
+import java.util.List;
+import java.util.Set;
+
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Entity
 public class AgeType {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String type;
+
+    @OneToMany(mappedBy = "ageType")
+    private Set<AppUser> appUsers;
+
+    @OneToMany(mappedBy = "ageType")
+    private List<Normativ> normativs;
+
 }
 
